@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>祁阳七中智能管家 - 常见问题</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            margin: 2rem auto;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        header {
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, #ffffff, #d7e1ec, #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d, #00c9ff);
+            background-size: 200% auto;
+            border-radius: 2px;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-top: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .notification-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notification-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(100, 255, 218, 0.6);
+        }
+        
+        .notification-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #64ffda;
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .notification-title {
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #ffffff, #64ffda);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .notification-desc {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .qrcode-container {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            margin: 1.5rem 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .qrcode-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .qrcode-placeholder {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(45deg, #1a2980, #26d0ce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .qrcode-placeholder i {
+            font-size: 4rem;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .qrcode-label {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #f0f0f0;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 2.5rem auto;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .faq-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .faq-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            background: linear-gradient(90deg, #64ffda, #00c9ff, #64ffda);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 4s ease infinite;
+        }
+        
+        .faq-count {
+            background: rgba(100, 255, 218, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+            border-color: rgba(100, 255, 218, 0.6);
+        }
+        
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease, padding 0.3s ease;
+            position: relative;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), padding 0.3s ease, opacity 0.3s ease;
+            background: rgba(0, 0, 0, 0.12);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0;
+        }
+        
+        .faq-answer.active {
+            padding: 1.2rem 1.5rem;
+            max-height: 1000px;
+            opacity: 1;
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .highlight {
+            background: linear-gradient(to right, #64ffda, #00c9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+        
+        .payment-qr {
+            display: inline-block;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .payment-qr img {
+            width: 150px;
+            height: 150px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        /* 智能助手提示样式 */
+        .assistant-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .assistant-container:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .assistant-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #64ffda;
+        }
+        
+        .assistant-title i {
+            font-size: 1.8rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .assistant-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .assistant-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 4rem;
+            opacity: 0.1;
+            color: #64ffda;
+            transform: rotate(15deg);
+        }
+        
+        .assistant-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            color: #1a2980;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .assistant-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .school-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: rotate 25s linear infinite;
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .decoration {
+            position: absolute;
+            font-size: clamp(8rem, 20vw, 12rem);
+            opacity: 0.03;
+            z-index: 0;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .decoration:nth-child(1) {
+            top: 20px;
+            left: 20px;
+            animation: float 15s infinite linear;
+        }
+        
+        .decoration:nth-child(2) {
+            bottom: 20px;
+            right: 20px;
+            animation: float 18s infinite linear reverse;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 15px) rotate(5deg); }
+            50% { transform: translate(0, 30px) rotate(0deg); }
+            75% { transform: translate(-10px, 15px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .notification-card {
+                padding: 1.5rem;
+            }
+            
+            .faq-question {
+                padding: 1rem;
+            }
+            
+            .faq-answer.active {
+                padding: 1rem;
+            }
+            
+            .school-logo {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+            
+            .assistant-container {
+                padding: 1.2rem;
+            }
+            
+            .assistant-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* 添加滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #64ffda, #00c9ff);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #4ae2bc, #00b4e6);
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration">
+        <i class="fas fa-graduation-cap"></i>
+    </div>
+    <div class="decoration">
+        <i class="fas fa-book"></i>
+    </div>
+    
+    <div class="container">
+        <div class="school-logo">
+            <i class="fas fa-school"></i>
+        </div>
+        
+        <header>
+            <h1>祁阳七中智能管家</h1>
+            <p class="subtitle">智慧校园管理 · 高效学习助手 · 便捷校园生活</p>
+        </header>
+        
+        <div class="notification-card">
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3 class="notification-title">校园通知</h3>
+            <p class="notification-desc">扫描下方二维码关注学校公众号，获取最新校园通知、活动信息和重要公告</p>
+            
+            <div class="qrcode-container">
+                <img src="8327a3b6c68a2a5ed4a648b1327524e3.png" alt="祁阳七中官方公众号二维码" style="width: 180px; height: 180px; border-radius: 10px;">
+            </div>
+            <div class="qrcode-label">祁阳七中官方公众号</div>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-header">
+                <div class="faq-title">常见问题解答</div>
+                <div class="faq-count">共5个问题</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Q1：领取录取通知书时间</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>回答：<span class="highlight">8月底时间暂定</span>，具体时间请关注学校官方通知。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Q2：志愿填报流程</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>回答：详细志愿填报流程请参考官方指南：</p>
+                    <p style="margin-top: 10px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                        <a href="https://mp.weixin.qq.com/s/C_RKEnup_QpCVFYiw6z7rg" target="_blank" style="color: #64ffda; text-decoration: underline;">https://mp.weixin.qq.com/s/C_RKEnup_QpCVFYiw6z7rg</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Q3：分班考试时间</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer active">
+                    <p>回答：分班考试时间为 <span class="highlight">8月27日8:30-10:30</span>，考试科目为<span class="highlight">语数英三科</span>。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Q4：分班考号查询</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>回答：分班当天在公众号里面扫码查询。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Q5：生活费等费用咨询</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>回答：生活费等费用约为 <span class="highlight">1800元左右</span>，以具体通知为准。</p>
+                    <p>缴费方式：<span class="highlight">扫码缴费</span></p>
+                    <div class="payment-qr">
+                        <div class="qrcode-placeholder" style="width: 120px; height: 120px;">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div>缴费二维码</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 智能助手提示区 -->
+        <div class="assistant-container">
+            <i class="fas fa-robot assistant-icon"></i>
+            <h3 class="assistant-title">
+                <i class="fas fa-comments"></i>
+                智能小七助手
+            </h3>
+            <p class="assistant-content">如有更多问题，请点击下方按钮或直接询问右下角智能小七助手，我们将24小时为您解答各类校园问题！</p>
+            <button class="assistant-button">
+                <i class="fas fa-comment-alt"></i>
+                立即咨询智能小七
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // FAQ折叠功能
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // 切换活动状态
+                answer.classList.toggle('active');
+                
+                // 旋转图标
+                if (answer.classList.contains('active')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+        
+        // 初始展开第三个问题
+        document.querySelector('.faq-item:nth-child(3) .faq-question i').style.transform = 'rotate(180deg)';
+        
+        // 智能助手按钮点击效果
+        document.querySelector('.assistant-button').addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在打开助手...';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> 助手已打开';
+                this.style.background = 'linear-gradient(90deg, #92fe9d, #00c9ff)';
+                
+                // 模拟打开助手
+                setTimeout(() => {
+                    alert('智能小七助手已启动！请在右下角开始对话');
+                }, 500);
+            }, 1500);
+        });
+    </script>
+</body>
+<script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.10/libs/cn/index.js"></script>
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7529007680367820839',
+    },
+    componentProps: {
+      title: 'Coze',
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_r1OhdQEh2NbrNIcUAB5QByL5gRkcn0xXhR8rmW9eqaSs1yIeaxQqlOAnWCuxfeHS',
+      onRefreshToken: function () {
+        return 'pat_********'
+      }
+    }
+  });
+</script>
+</html>
